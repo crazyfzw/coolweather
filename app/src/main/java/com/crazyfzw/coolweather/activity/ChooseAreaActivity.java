@@ -19,7 +19,7 @@ import com.crazyfzw.coolweather.model.County;
 import com.crazyfzw.coolweather.model.Province;
 import com.crazyfzw.coolweather.util.HttpCallbackListener;
 import com.crazyfzw.coolweather.util.HttpUtil;
-import com.crazyfzw.coolweather.util.Utilty;
+import com.crazyfzw.coolweather.util.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -191,11 +191,11 @@ public class ChooseAreaActivity extends Activity {
               boolean result = false;
                 if ("province".equals(type)){
                     //解析和处理服务器返回的数据并存到数据库中
-                    result = Utilty.handleProvincesResponse(coolWeatherDB, response);
+                    result = Utility.handleProvincesResponse(coolWeatherDB, response);
                 }else if ("city".equals(type)){
-                    result = Utilty.handleCitiesResponse(coolWeatherDB, response, selectedProvince.getId());
+                    result = Utility.handleCitiesResponse(coolWeatherDB, response, selectedProvince.getId());
                 }else if ("county".equals(type)){
-                    result = Utilty.handleCountiesResponse(coolWeatherDB, response, selectedCity.getId());
+                    result = Utility.handleCountiesResponse(coolWeatherDB, response, selectedCity.getId());
                 }
 
                 if (result){

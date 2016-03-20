@@ -10,7 +10,7 @@ import com.crazyfzw.coolweather.model.Province;
 /**
  * Created by Crazyfzw on 2016/3/19.
  */
-public class Utilty {
+public class Utility {
 
     /**
      * 解析和处理服务器返回的省级数据
