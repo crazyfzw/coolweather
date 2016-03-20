@@ -1,7 +1,7 @@
 package com.crazyfzw.coolweather.model;
 
 /**
- * Created by Administrator on 2016/3/18.
+ * Created by Crazyfzw on 2016/3/18.
  */
 public class County {
 

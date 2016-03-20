@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/3/18.
+ * Created by Crazyfzw on 2016/3/18.
  */
 public class CoolWeatherDB {
 
@@ -117,7 +117,7 @@ public class CoolWeatherDB {
                 city.setCityCode(cursor.getString(cursor.getColumnIndex("city_code")));
                 city.setProvinceId(provinceId);
                 list.add(city);
-            } while (cursor.moveToFirst());
+            } while (cursor.moveToNext());
         }
 
         if (cursor !=null){
