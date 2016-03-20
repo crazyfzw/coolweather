@@ -2,7 +2,10 @@ package com.crazyfzw.coolweather.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -74,6 +77,15 @@ public class ChooseAreaActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //从SharedPreferences文件中根据city_selected标识符判断当前是否已经选择了一个城市
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.getBoolean("city_selected", false)){
+            Intent intent = new Intent(this, WeatherActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.choose_area);
         titleText = (TextView) findViewById(R.id.title_text);
@@ -96,6 +108,13 @@ public class ChooseAreaActivity extends Activity {
                     selectedCity = cityList.get(position);
                     //若选中了市，则把该市下各县的数据加载到datalist
                     queryCounties();
+                }else if (currentLevel == LEVEL_COUNTY){
+                    //若选中了县，则把该县的代码countyCode传到WeatherActivity.class中用于查询显示对应的天气信息
+                    String countyCode = countyList.get(position).getCountyCode();
+                    Intent intent = new Intent(ChooseAreaActivity.this, WeatherActivity.class);
+                    intent.putExtra("county_code", countyCode);
+                    startActivity(intent);
+                    finish();
                 }
 
             }

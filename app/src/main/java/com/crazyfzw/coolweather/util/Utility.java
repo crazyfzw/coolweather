@@ -1,11 +1,21 @@
 package com.crazyfzw.coolweather.util;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.crazyfzw.coolweather.db.CoolWeatherDB;
 import com.crazyfzw.coolweather.model.City;
 import com.crazyfzw.coolweather.model.County;
 import com.crazyfzw.coolweather.model.Province;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Crazyfzw on 2016/3/19.
@@ -81,5 +91,48 @@ public class Utility {
             }
         }
         return false;
+    }
+
+
+    /**
+     * 解析服务器返回地json数据，并将解析出的数据存储到本地
+     */
+    public static void handleWeatherResponse(Context context, String response){
+        try{
+            JSONObject jsonObject = new JSONObject(response);
+            JSONObject weatherinfo = jsonObject.getJSONObject("weatherinfo");
+            String cityName = weatherinfo.getString("city");
+            String weatherCode = weatherinfo.getString("cityid");
+            String temp1 = weatherinfo.getString("temp1");
+            String temp2 = weatherinfo.getString("temp2");
+            String weatherDesp = weatherinfo.getString("weather");
+            String publishTime = weatherinfo.getString("ptime");
+            saveWeatherinfo(context, cityName, weatherCode, temp1, temp2, weatherDesp, publishTime);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+    /**
+     * 将服务器返回的所有天气信息存储到SharedPreference(使用键值对的方式存储数据 1,2,3)中.
+     */
+    public static void saveWeatherinfo(Context context, String cityName,
+                   String weatherCode, String temp1, String temp2, String weatherDesp, String publishTime){
+        SimpleDateFormat sdf =new SimpleDateFormat("yyyy年M月d日", Locale.CHINA);//格式化日期
+        //1.取得SharedPreferences.Editor对象
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        //2.调用putString、putInt等方法存储数据
+        editor.putBoolean("city_selected", true);
+        editor.putString("city_name", cityName);
+        editor.putString("weather_code", weatherCode);
+        editor.putString("temp1", temp1);
+        editor.putString("temp2", temp2);
+        editor.putString("weather_desp", weatherDesp);
+        editor.putString("publish_time", publishTime);
+        editor.putString("current_date", sdf.format(new Date()));
+        //3.调用commit提交数据
+        editor.commit();
     }
 }
