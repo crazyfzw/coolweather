@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crazyfzw.coolweather.R;
+import com.crazyfzw.coolweather.service.AutoUpdateService;
 import com.crazyfzw.coolweather.util.HttpCallbackListener;
 import com.crazyfzw.coolweather.util.HttpUtil;
 import com.crazyfzw.coolweather.util.Utility;
@@ -154,6 +155,12 @@ public class WeatherActivity extends Activity implements View.OnClickListener{
         //查询的数据显示在界面上后，设置天气信息为可见
         weatherInfoLayout.setVisibility(View.VISIBLE);
         cityNameText.setVisibility(View.VISIBLE);
+
+        /**
+         * 激活定时任务，使后台自动更新天气
+         */
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     @Override

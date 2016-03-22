@@ -18,6 +18,8 @@
 
       <activity android:name="com.crazyfzw.coolweather.activity.WeatherActivity">
       </activity>
+        <service android:name="com.crazyfzw.coolweather.service.AutoUpdateService"></service>
+        <receiver android:name="com.crazyfzw.coolweather.receiver.AutoUpdateReceiver"></receiver>
     </application>
 
 </manifest>
