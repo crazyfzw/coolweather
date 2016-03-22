@@ -24,6 +24,8 @@ import com.crazyfzw.coolweather.util.HttpCallbackListener;
 import com.crazyfzw.coolweather.util.HttpUtil;
 import com.crazyfzw.coolweather.util.Utility;
 
+import net.youmi.android.AdManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +85,12 @@ public class ChooseAreaActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /**
+         * 在应用的第一个Activity(启动类)的onCreate方法中初始化有米广告
+         * 参数(添加应用时生成的发布id, 添加应用时生成的应用密钥, 当前是否为测试模式不是就用false)
+         */
+        AdManager.getInstance(this).init("f8b6a610ac31ba2d", "81f399b701974959", true);
+
         //判断否从WeatherActivity中跳过来，是则根据键读取到true,否则返回false
         isFromWeatherActivity = getIntent().getBooleanExtra("from_weather_activity", false);
         //从SharedPreferences文件中根据city_selected标识符判断当前是否已经选择了一个城市

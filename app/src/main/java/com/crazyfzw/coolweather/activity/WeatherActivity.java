@@ -18,6 +18,9 @@ import com.crazyfzw.coolweather.util.HttpCallbackListener;
 import com.crazyfzw.coolweather.util.HttpUtil;
 import com.crazyfzw.coolweather.util.Utility;
 
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
+
 import org.w3c.dom.Text;
 
 /**
@@ -83,6 +86,18 @@ public class WeatherActivity extends Activity implements View.OnClickListener{
             //没有县级代号时就直接显示本地天气信息
             showWeather();
         }
+
+        /**
+         * 在Activity中显示出广告
+         */
+        // 1.实例化广告条
+        AdView adView = new AdView(this, AdSize.FIT_SCREEN);
+
+       //2. 获取要嵌入广告条的布局
+        LinearLayout adLayout=(LinearLayout)findViewById(R.id.adLayout);
+
+       // 3.将广告条加入到布局中
+        adLayout.addView(adView);
     }
 
     /**
