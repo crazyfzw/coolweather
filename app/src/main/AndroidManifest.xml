@@ -26,8 +26,7 @@
       </activity>
         <service android:name="com.crazyfzw.coolweather.service.AutoUpdateService"></service>
         <receiver android:name="com.crazyfzw.coolweather.receiver.AutoUpdateReceiver"></receiver>
-    </application>
-
+        
     <activity
         android:name="net.youmi.android.AdBrowser"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
@@ -44,4 +43,5 @@
             <data android:scheme="package" />
         </intent-filter>
     </receiver>
+    </application>
 </manifest>
